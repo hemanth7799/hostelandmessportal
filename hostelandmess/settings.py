@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'Hostel.apps.HostelConfig',
     'Mess.apps.MessConfig',
     'django.contrib.admin',
     'django.contrib.auth',
