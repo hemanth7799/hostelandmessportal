@@ -1,0 +1,19 @@
+<html>
+<body><form action="/add/" method="post" >
+  {% csrf_token %}
+    <h3>FORM TO ADD A PLANT</h3>
+    <fieldset>
+    
+      <input placeholder="PLANT ID" name="pid" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="PLANT LATITUDE" value='13.5482' name="plat" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="PLANT LONGITUDE" name="plong" value='80.0002'  type="text" tabindex="3" required>
+    </fieldset>
+     <input type="submit" value="ADD PLANT" onclick="myfunc()"/>
+    <p3 align="right" class="copyright">Designed by GROUP-19</a></p3>
+  </form>
+  </body>
+  </html>
