@@ -11,17 +11,17 @@ class User(AbstractUser):
 
 class Student(models.Model):
 	user=models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
-	first_name=models.CharField(max_length=50,default=None)
-	rollno=models.CharField(max_length=50,default=None)
-	middle_name=models.CharField(max_length=50,default=None)
-	last_name=models.CharField(max_length=50,default=None)
-	regis_year=models.IntegerField(default=None)
-	gender=models.CharField(max_length=2)
-	curr_year=models.IntegerField(default=None)
-	regis_deg=models.CharField(max_length=20,default=None)
-	regis_deg_dur=models.IntegerField(default=None)
-	curr_sem=models.IntegerField(default=None)
-	blood_grp=models.CharField(max_length=20,default=None)
+	first_name=models.CharField(max_length=50,default=None,null=True)
+	rollno=models.CharField(max_length=50,default=None,unique=True)
+	middle_name=models.CharField(max_length=50,default=None,null=True)
+	last_name=models.CharField(max_length=50,default=None,null=True)
+	regis_year=models.IntegerField(default=None,null=True)
+	gender=models.CharField(max_length=2,null=True)
+	curr_year=models.IntegerField(default=None,null=True)
+	regis_deg=models.CharField(max_length=20,default=None,null=True)
+	regis_deg_dur=models.IntegerField(default=None,null=True)
+	curr_sem=models.IntegerField(default=None,null=True)
+	blood_grp=models.CharField(max_length=20,default=None,null=True)
 	def __str__(self):
 		return str(self.rollno)
 
@@ -33,7 +33,7 @@ class MobileNo(models.Model):
 
 class RoomRegistration(models.Model):
 	student=models.OneToOneField(Student,on_delete=models.CASCADE,default=None)
-	room_no=models.IntegerField(default=0)
+	pref_room_no=models.IntegerField(default=0)
 	fee_proof=models.FileField()
 	hostel_name=models.CharField(max_length=10,default=None)
 
@@ -56,6 +56,8 @@ class GuestEntry(models.Model):
 	student=models.ForeignKey(Student,on_delete=models.CASCADE,default=None)
 	guest_gender=models.CharField(max_length=2)
 	no_of_stay=models.IntegerField(default=None)
+	guest_name=models.CharField(max_length=100,default=None)
+	guest_age=models.IntegerField(default=None)
 
 
 class Employee(models.Model):
