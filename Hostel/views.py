@@ -6,6 +6,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404,render
 # Create your views here.
 from django.http import HttpResponse
+from Hostel.forms import RoomRegistrationForm
 #from django.contrib.auth.models import AbstractUser
 def inOutIndex(request):
 	form={}
@@ -77,4 +78,20 @@ def GuestEntryIndex(request):
 	context={'text':0}
 			
 	return render(request, 'Hostel/guestEntry.html',context)
+def registration_form(request):
+    if request.method == 'POST':
+	#usr=User.objects.get(username='venkatlokesh')
+	#stud=Student()
+	#stud=Student.objects.get(user=usr)
+        form = RoomRegistrationForm(request.POST, request.FILES)
+	#form.student=stud
+	#form.append({'student':stud})
+        if form.is_valid():
+            form.save()
+            return HttpResponse('data stored in db')
+    else:
+        form = RoomRegistrationForm()
+    return render(request, 'Hostel/roomregistration.html', {
+        'form': form
+})
 
