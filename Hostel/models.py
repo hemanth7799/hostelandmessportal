@@ -41,7 +41,7 @@ class RoomRegistration(models.Model):
 class HostelComplaint(models.Model):
 	student=models.ForeignKey(Student,on_delete=models.CASCADE,default=None)
 	complaint=models.CharField(max_length=500,default=None)
-	complain_time=models.DateTimeField(default=datetime.now)
+	complain_time=models.DateTimeField(default=None)
 
 
 class InOutList(models.Model):

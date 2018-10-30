@@ -46,7 +46,7 @@ def HostelComplaintIndex(request):
 		hos_compl=HostelComplaint()
 		hos_compl.student=stud
 		hos_compl.complaint=complaint
-		hos_complain_time=complain_time
+		hos_compl.complain_time=complain_time
 
 		hos_compl.save()
 		return HttpResponse('data stored in db')
@@ -77,7 +77,4 @@ def GuestEntryIndex(request):
 	context={'text':0}
 			
 	return render(request, 'Hostel/guestEntry.html',context)
-
-	
-
 
