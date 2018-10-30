@@ -34,7 +34,7 @@ class MobileNo(models.Model):
 class RoomRegistration(models.Model):
 	student=models.OneToOneField(Student,on_delete=models.CASCADE,default=None)
 	pref_room_no=models.IntegerField(default=0)
-	fee_proof=models.FileField()
+	fee_proof=models.FileField(upload_to='documents/')
 	hostel_name=models.CharField(max_length=10,default=None)
 
 
