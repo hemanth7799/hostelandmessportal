@@ -1,0 +1,22 @@
+<html>
+<body><form action="/hostel/guestEntry/" method="post" >
+  {% csrf_token %}
+    <h3>GuestEntry</h3>
+    <fieldset>
+    
+      <input placeholder="guest_name" name="guest_name" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="guest_age" name="guest_age" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="guest_gender" name="guest_gender"  type="text" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="no_of_days" name="no_of_stay" type="text" tabindex="3" required>
+    </fieldset>
+     <input type="submit" value="">
+    <p3 align="right" class="copyright">Designed by GROUP-05</a></p3>
+  </form>
+  </body>
+  </html>
