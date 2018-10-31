@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render, get_object_or_404
-from .forms import RefundForm
+from .forms import RefundForm,FeedbackForm
 from django.contrib.auth import get_user_model
 from Hostel.models  import Student
 User = get_user_model()
@@ -38,7 +38,7 @@ def feedback(request):
     if not request.user.is_authenticated():
         return render(request, 'Mess/login.html')
     else:
-        form = RefundForm(request.POST or None)
+        form = FeedbackForm(request.POST or None)
         if form.is_valid():
             mess = form.save(commit=False)
             mess.student = Student.objects.get(user=request.user)
