@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from datetime import datetime 
 from django.contrib.auth.models import AbstractUser
-
+from datetime import datetime
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
@@ -34,22 +34,25 @@ class MobileNo(models.Model):
 class RoomRegistration(models.Model):
 	student=models.OneToOneField(Student,on_delete=models.CASCADE,default=None)
 	pref_room_no=models.IntegerField(default=0)
-	fee_proof=models.FileField()
+	fee_proof=models.FileField(upload_to='documents/')
 	hostel_name=models.CharField(max_length=10,default=None)
-
+	def __str__(self):
+		return str(self.student)+','+str(self.pref_room_no)+','+str(self.fee_proof)+','+str(self.hostel_name)
 
 class HostelComplaint(models.Model):
 	student=models.ForeignKey(Student,on_delete=models.CASCADE,default=None)
 	complaint=models.CharField(max_length=500,default=None)
-	complain_time=models.DateTimeField(default=None)
-
+	complain_time=models.DateTimeField(default=datetime.now)
+	def __str__(self):
+		return str(self.student)+','+str(self.complaint)+','+str(self.complain_time)
 
 class InOutList(models.Model):
 	student=models.ForeignKey(Student,on_delete=models.CASCADE,default=None)
-	in_time=models.DateTimeField(default=None)
-	out_time=models.DateTimeField(default=None)
+	in_time=models.DateTimeField(default=datetime.now())
+	out_time=models.DateTimeField(default=datetime.now())
 	out_reason=models.CharField(max_length=500,default=None)
 	out_place=models.CharField(max_length=15,default=None)
+	is_out=models.BooleanField(default=False)
 
 
 class GuestEntry(models.Model):

@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from Hostel.models  import Student
 User = get_user_model()
 
-IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg','pdf','py']
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg','pdf']
 
 
 def refund(request):
@@ -43,9 +43,9 @@ def feedback(request):
             mess = form.save(commit=False)
             mess.student = Student.objects.get(user=request.user)
             mess.save()
-            return HttpResponse("Advance happy diwali")
+            return render(request, 'Mess/feedback.html', {'error_message': 'feedback submitted successfully'})
         context = {
-            "form": form,
+            "form": form
         }
         return render(request, 'Mess/feedback.html', context)
 

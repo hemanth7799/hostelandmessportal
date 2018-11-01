@@ -8,7 +8,7 @@ class RefundForm(forms.ModelForm):
 
     class Meta:
         model = Refund
-        fields = ['indate', 'outdate', 'mail_proof']
+        fields = ['from_date', 'to_date', 'mail_proof']
 class FeedbackForm(forms.ModelForm):
 
     class Meta:

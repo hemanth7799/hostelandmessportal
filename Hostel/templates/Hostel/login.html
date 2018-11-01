@@ -1,322 +1,215 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html >
 <head>
-<style>
-.card {
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 130%;
-  padding: 5px 5px;
-  border-radius: 40px;
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+  
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #0af;
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
 }
 
-.card:hover {
-    box-shadow: 0 40px 
-35px 0 rgba(0,0,0,0.2);
-}
-.button {
-  display: inline-block;
-  border-radius: 0px;
-  background-color: #6f4f4f;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 22px;
-  padding: 15px;
-  width: 220px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 0px;
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url({%  static 'images/bg2.jpg'%});
+	background-size: cover;
+	-webkit-filter: blur(0px);
+	z-index: 0;
 }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+.grad{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 1;
+	opacity: 0.7;
 }
 
-.button span:after {
-  content: '\2193';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
+.header{
+	position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 255px);
+	z-index: 2;
 }
 
-.button:hover span {
-  padding-right: 30px;
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 25px;
+	font-weight: 200;
 }
 
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
+.header div span{
+	color: #5379fa !important;
 }
 
-/* Style The Dropdown Button */
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.login{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
-* {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
-.mySlides {display: none;}
-img {vertical-align: middle;}
-
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-.transition, form button, form .question label, form .question input[type="text"] {
-  -moz-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
-  -o-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
-  -webkit-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
-  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
-}
-
-* {
-  font-family: Helvetica, sans-serif;
-  font-weight: light;
-  -webkit-font-smoothing: antialiased;
-}
-
-form {
-  position: relative;
-  display: inline-block;
-  max-width: 700px;
-  min-width: 500px;
-  box-sizing: border-box;
-  padding: 30px 25px;
-  background-color: white;
-  border-radius: 40px;
-  margin: 40px 0;
-  left: 50%;
-  -moz-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-form h1 {
-  color: #6f4f4f;
-  font-weight: 100;
-  letter-spacing: 0.01em;
-  margin-left: 15px;
-  margin-bottom: 35px;
-  text-transform: uppercase;
-}
-form button {
-  margin-top: 35px;
-  background-color: white;
-  border: 1px solid #B22222;
-  line-height: 0;
-  font-size: 17px;
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 20px 15px;
-  border-radius: 60px;
-  color: #B22222;
-  font-weight: 100;
-  letter-spacing: 0.01em;
-  position: relative;
-  z-index: 1;
-}
-form button:hover, form button:focus {
-  color: white;
-  background-color: #ff4a56;
-}
-form .question {
-  position: relative;
-  padding: 10px 0;
-}
-form .question:first-of-type {
-  padding-top: 0;
-}
-form .question:last-of-type {
-  padding-bottom: 0;
-}
-form .question label {
-  transform-origin: left center;
-  color: #6f4f4f;
-  font-weight: 100;
-  letter-spacing: 0.01em;
-  font-size: 17px;
-  box-sizing: border-box;
-  padding: 10px 15px;
-  display: block;
-  position: absolute;
-  margin-top: -40px;
-  z-index: 2;
-  pointer-events: none;
-}
-form .question input[type="text"] {
-  appearance: none;
-  background-color: none;
-  border: 1px solid #6f4f4f;
-  line-height: 0;
-  font-size: 17px;
-  width: 100%;
-  display: block;
-  box-sizing: border-box;
-  padding: 10px 15px;
-  border-radius: 60px;
-  color: #6f4f4f;
-  font-weight: 100;
-  letter-spacing: 0.01em;
-  position: relative;
-  z-index: 1;
-}
-form .question input[type="text"]:focus {
-  outline: none;
-  background: #6f6f6f;
-  color: white;
-  margin-top: 30px;
-}
-form .question input[type="text"]:valid {
-  margin-top: 30px;
-}
-form .question input[type="text"]:focus ~ label {
-  -moz-transform: translate(0, -35px);
-  -ms-transform: translate(0, -35px);
-  -webkit-transform: translate(0, -35px);
-  transform: translate(0, -35px);
-}
-form .question input[type="text"]:valid ~ label {
-  text-transform: uppercase;
-  font-style: italic;
-  -moz-transform: translate(5px, -35px) scale(0.6);
-  -ms-transform: translate(5px, -35px) scale(0.6);
-  -webkit-transform: translate(5px, -35px) scale(0.6);
-  transform: translate(5px, -35px) scale(0.6);
-}
-form .question input[type="password"] {
-  appearance: none;
-  background-color: none;
-  border: 1px solid #6f4f4f;
-  line-height: 0;
-  font-size: 17px;
-  width: 100%;
-  display: block;
-  box-sizing: border-box;
-  padding: 10px 15px;
-  border-radius: 60px;
-  color: #6f4f4f;
-  font-weight: 100;
-  letter-spacing: 0.01em;
-  position: relative;
-  z-index: 1;
-}
-form .question input[type="password"]:focus {
-  outline: none;
-  background: #6f6f6f;
-  color: white;
-  margin-top: 30px;
-}
-form .question input[type="password"]:valid {
-  margin-top: 30px;
-}
-form .question input[type="password"]:focus ~ label {
-  -moz-transform: translate(0, -35px);
-  -ms-transform: translate(0, -35px);
-  -webkit-transform: translate(0, -35px);
-  transform: translate(0, -35px);
-}
-form .question input[type="password"]:valid ~ label {
-  text-transform: uppercase;
-  font-style: italic;
-  -moz-transform: translate(5px, -35px) scale(0.6);
-  -ms-transform: translate(5px, -35px) scale(0.6);
-  -webkit-transform: translate(5px, -35px) scale(0.6);
-  transform: translate(5px, -35px) scale(0.6);
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
 }
 
 
-</style>
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login button{
+	width: 260px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+
+.login input[type=button]:hover{
+	opacity: 0.8;
+}
+
+.login input[type=button]:active{
+	opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+.a1{
+	font-size: 17px;
+	text-decoration: none;
+	color: white;
+};
+    </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 </head>
+
 <body>
+  <div class="body"></div>
+		<div class="grad"><br>
+     <a href="{% url 'plant:home' %}" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Home</a>
+  
+                               </div>
+		<div class="header">
 
-	<table align="center" width="100%" bgcolor="#ffcb0c">
-		<tr>
-			<th>
-				<div style="background-color:#ffcb0c;width:100%;" align="right"><div style="width:10%;"><img src="iiit.png" height="100" width="100" alt="no image"></div>
-			</th>
-			<th>
-				<p><font color="#B22222" size="5">Indian institute of Information Technology , Sri city , Chittoor</font></p><font color="#B22222" size=4>(An Institute of National Importance under Act of Parliament)</p></font>
-			</th>
-		</tr>
-	</table><center><br>
-<table>
-<tr>
-  <td width="30%">
-<div class="img-rounded" style="float: left; background-color: #e3f1ff; width: 300px; height: 420px; border: 1px solid black; margin: 10px;"><h3 style="color: #ffffff; background-color: #15317E; text-align: center; margin: 0px; padding: 0px;">Announcements</h3><div id="cc-homepage-announcements" style="height: 320px; overflow-x: hidden; overflow-y: auto; padding: 6px; text-align: left;">&nbsp;</div>
-</div>
-  </td>
-  <td width="63.5%" valign="top">
-	<form>
-    <div class="card">
-	<center><h1 style="color:#B22222;font-size:40px;font-family:Copperplate Gothic Bold">HOSTEL AND MESS PORTAL</h1></center>
- <center><h1><u>LOGIN-FORM</u></h1></center></div>
- <div class="card">
-  <div class="question">
-    <br><br>
-    <input type="text" required/>
-    <label>User Name</label>
-  </div>
-  <div class="question">
-    <input type="password" required/>
-    <label>Password</label>
-  </div>
-  <center><button href=" https://serene-wildwood-35121.herokuapp.com/login/5bdb4393203ce300150cb538">Submit</button></center>
-</div>
-</form>
-</td>
-</tr>
-</table>
+
+			
+		</div>
+		<br>
+		<div class="login">
+{% if error_message %}
+                        <h2 style="color:red"><strong>{{ error_message }}</strong></h2>
+                    {% endif %}
+<form class="form-horizontal" role="form" action="{% url 'plant:login_user'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="id_username">
+                               <h3> Username:</h3>
+                            </label>
+                            <div class="col-sm-10">
+                                <input id="id_username" maxlength="30" name="username" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="id_password">
+                                <h3>Password:</h3>
+                            </label>
+                            <div class="col-sm-10">
+                                <input id="id_password" maxlength="30" name="password" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+<div class="panel-footer">
+					<h3>Don't have an account? <a href="{% url 'plant:register' %}">Click here</a> to register.</h3>
+                </div>
+		</div>
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  
 </body>
-
 </html>

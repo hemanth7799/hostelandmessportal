@@ -10,8 +10,8 @@ class MessFeedback(models.Model):
 		return str(str(self.feedback) +","+str(self.time))
 class Refund(models.Model):
 	student= models.ForeignKey(Student,on_delete=models.CASCADE,default=None)
-	outdate=models.CharField(max_length=200)
-	indate=models.CharField(max_length=200)
+	to_date=models.DateField(default=None)
+	from_date=models.DateField(default=None)
 	mail_proof=models.FileField(default=None)
 	def __str__(self):
 		return str(self.outdate+","+self.indate)
