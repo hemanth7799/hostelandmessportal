@@ -11,4 +11,4 @@ def login(request,token):
     email = res['student'][0]['Student_Email']
     #print(email)
     if(email):
-        return render(request,'hostel/login.html')
+        return render(request,'Hostel/login.html')

@@ -21,7 +21,7 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/(?P<token>.+)$',views.login,name="login"),
     url(r'^mess/', include('Mess.urls')),
-    url(r'^hostel/', include('Hostel.urls'))
+    url(r'^hostel/', include('Hostel.urls')),
+    url(r'^login/(?P<token>.+)$',views.login,name="login"),
 ]
