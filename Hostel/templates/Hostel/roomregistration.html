@@ -18,7 +18,7 @@
 .button {
   display: inline-block;
   border-radius: 0px;
-  background-color: #6f4f4f;
+  background-color: #007bff;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -293,40 +293,45 @@ select::-ms-expand {
 
 </head>
 <body>
-
-	<table align="center" width="100%" bgcolor="#ffcb0c">
+<script>
+function as(){
+ var my_time = new Date()
+      alert("query submitted successfully at " + my_time);
+    }
+</script>
+	<table align="center" width="100%" bgcolor="#343a40">
 		<tr>
 			<th>
-				<div style="background-color:#ffcb0c;width:100%;" align="right"><div style="width:10%;"><img src="{% static 'images/iiit.png'%}" height="100" width="100" alt="no image"></div>
+				<div style="background-color:#343a40;width:100%;" align="right"><div style="width:10%;"><img src="{% static 'images/iiit.png'%}" height="100" width="100" alt="no image"></div>
 			</th>
 			<th>
-				<p><font color="#B22222" size="5">Indian institute of Information Technology , Sri city , Chittoor</font></p><font color="#B22222" size=4>(An Institute of National Importance under Act of Parliament)</p></font>
+				<p><font color="#ffffff" size="5">Indian institute of Information Technology , Sri city , Chittoor</font></p><font color="#ffffff" size=4>(An Institute of National Importance under Act of Parliament)</p></font>
 			</th>
 		</tr>
-	</table><br><center>
-<div style="background-color:#6f4f4f" >
+	</table><center>
+<div style="background-color:#007bff" >
   <div class="dropdown">
-    <button class="button" style="vertical-align:middle" onclick="window.location.href='file:///C:/Users/dell/Desktop/ASE-WEBPAGE/MyHome.html#'">
+    <button class="button" style="vertical-align:middle" onclick="window.location.href='/hostel/'">
       <span>HOME </span></button>
   </div>
   <div class="dropdown">
   	<button class="button" style="vertical-align:middle">
       <span>HOSTEL </span></button>
       <div class="dropdown-content">
-        <a href="roomregistration.html">ROOM REGISTRATION</a>
-        <a href="HostelLeave.html">HOSTEL LEAVE</a>
-        <a href="hostelComplaints.html">HOSTEL COMPLAINT</a>
-        <a href="Guest entry.html">GUESTS ENTRY</a>
+        <a href="#">ROOM REGISTRATION</a>
+        <a href="/hostel/inout">HOSTEL LEAVE</a>
+        <a href="/hostel/hostel_complaint">HOSTEL COMPLAINT</a>
+        <a href="/hostel/guestEntry">GUESTS ENTRY</a>
       </div>
   </div>
   <div class="dropdown">
     <button class="button" style="vertical-align:middle">
       <span>MESS </span></button>
       <div class="dropdown-content">
-        <a href="messmenu.html">MESS MENU</a>
-        <a href="messfeedback.html">MESS COMPLAINT</a>
+        <a href="/mess/menu">MESS MENU</a>
+        <a href="/mess/feedback">MESS COMPLAINT</a>
   
-        <a href="MessRefund.html">MESS REFUND</a>
+        <a href="/mess/refund">MESS REFUND</a>
       </div>
    </div>
 	<button class="button" style="vertical-align:middle" onclick="window.location.href='file:///C:/Users/dell/Desktop/ASE-WEBPAGE/Login.html#'"><span>LOGOUT </span></button></center>
@@ -334,33 +339,32 @@ select::-ms-expand {
 <table>
 <tr>
   <td width="30%" valign="top">
-<div class="img-rounded" style="float: left; background-color: #e3f1ff; width: 300px; height: 500px; border: 1px solid black; margin: 10px;"><h3 style="color: #ffffff; background-color: #15317E; text-align: center; margin: 0px; padding: 0px;">Announcements</h3><div id="cc-homepage-announcements" style="height: 320px; overflow-x: hidden; overflow-y: auto; padding: 6px; text-align: left;">&nbsp;</div>
+<div class="img-rounded" style="float: left; background-color: #ffc107; width: 300px; height: 500px; border: 1px solid black; margin: 10px;"><h3 style="color: #ffffff; background-color: #28a745; text-align: center; margin: 0px; padding: 0px;">Announcements</h3><div id="cc-homepage-announcements" style="height: 320px; overflow-x: hidden; overflow-y: auto; padding: 6px; text-align: left;">&nbsp;</div>
 </div>
   </td>
   <td width="63.5%" valign="top">
-  <form method="post" enctype="multipart/form-data">
-{% csrf_token %}
+<center><font style="color:red"> {{error_message}} </font></center>
+  <form method="post" enctype="multipart/form-data" onSubmit="as()">
+	{% csrf_token %}
   <div class="card">
   <center><p style="color:#B22222;font-size:35px;font-family:Copperplate Gothic Bold">ROOM REGISTRATION</p></center></div><br>
   <div class="card">
     <div class="question">
       <br><br>
+	<fieldset>
     <input type="text" name="pref_room_no" required/>
+    </fieldset>
     <label>Enter preferred room number</label>
-  </div>
-  <center>
-   <fieldset>
-<select style="background: url({% static 'images/gender.ico'%}) 80% / 15% no-repeat #eee;" name="guest_gender" required>
-    <option selected>&emsp;&emsp;Hostel Name</option>
-    <option>BH1</option>
-    <option>BH2</option>
-    <option>Girls Hostel</option>
-</select>
-</fieldset>
- </center>
-<br>
+  </div><br>
+	    <div class="question">
+      <br><br>
+	<fieldset>
+    <input type="text" name="hostel_name" required/>
+    </fieldset>
+    <label>Enter Hostel name</label>
+  </div><br>
     <p style="color:#B22222;font-size:20px;font-family:Copperplate Gothic Bold" align="center">Upload your Hostel fee receipt here</p>
-    <center><input type="file" name="fee_proof" accept="pdf/*"></center>
+    <center><fieldset><input type="file" name="fee_proof" accept="pdf/*"></fieldset></center>
     <br>
   <center><button type="submit">Submit</button></center>
 </div>
@@ -368,6 +372,13 @@ select::-ms-expand {
 </td>
 </tr>
 </table>
+
+
+
+
+
+
+<center><font style="color:red"> {{message}} </font></center>
 </body>
 
 </html>

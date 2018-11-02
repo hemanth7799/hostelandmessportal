@@ -1,11 +1,11 @@
 from django.conf.urls import include,url
 from . import views
-app_name = 'Mess'
+
 urlpatterns = [
+    url(r'^$',views.homepage,name='homepage'),
+	url(r'^messmenu',views.messmenu,name='messmenu'),
     url(r'^refund/$', views.refund, name='refund'),
     url(r'^feedback/$', views.feedback, name='feedback'), 
-    url(r'^feedbacklist/$', views.feedbacklist, name='feedbacklist'),
-    url(r'^refundlist/$', views.refundlist, name='refundlist'),
-    url('^login/(?P<token>.+)$',views.login,name="login")
-    url('^$',views.login_user,name="login_user")
+    url('^login/(?P<token>.+)$',views.login,name="login"),
+    url('^login_user$',views.login_user,name="login_user")
 ]

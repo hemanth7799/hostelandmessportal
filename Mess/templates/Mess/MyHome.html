@@ -1,21 +1,20 @@
-{% load static %}
+{% load static %}s
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
 <style>
 .card {
-    box-shadow: 0 10px 15px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 130%;
-	padding: 5px 5px;
-	border-radius: 40px;
+  padding: 5px 5px;
+  border-radius: 40px;
 }
 
 .card:hover {
     box-shadow: 0 40px 35px 0 rgba(0,0,0,0.2);
 }
-
 .button {
   display: inline-block;
   border-radius: 0px;
@@ -172,75 +171,11 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
-
-
-select {
-  margin: 50px;
-  width: 150px;
-  padding: 5px 35px 5px 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  height: 34px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-/* CAUTION: IE hackery ahead */
-select::-ms-expand { 
-    display: none; /* remove default arrow on ie10 and ie11 */
-}
-
-/* target Internet Explorer 9 to undo the custom arrow */
-@media screen and (min-width:0\0) {
-    select {
-        background:none\9;
-        padding: 5px\9;
-    } 
-}
-form button {
-  margin-top: 35px;
-  background-color: white;
-  border: 1px solid #B22222;
-  line-height: 0;
-  font-size: 17px;
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 20px 15px;
-  border-radius: 60px;
-  color: #B22222;
-  font-weight: 100;
-  letter-spacing: 0.01em;
-  position: relative;
-  z-index: 1;
-}
-form button:hover, form button:focus {
-  color: white;
-  background-color: #ff4a56;
-}
-
-textarea {
-    width: 100%;
-    height: 150px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid ##6f4f4f;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
-}
 </style>
 
 </head>
 <body>
- 
-<script>
-function as(){
- var my_time = new Date()
-      alert("query submitted successfully at " + my_time);
-    }
-</script>
+
 	<table align="center" width="100%" bgcolor="#343a40">
 		<tr>
 			<th>
@@ -253,17 +188,17 @@ function as(){
 	</table><center>
 <div style="background-color:#007bff" >
   <div class="dropdown">
-    <button class="button" style="vertical-align:middle" onclick="window.location.href='/hostel/'">
+    <button class="button" style="vertical-align:middle" onclick="window.location.href='#'">
       <span>HOME </span></button>
   </div>
   <div class="dropdown">
-    <button class="button" style="vertical-align:middle">
+  	<button class="button" style="vertical-align:middle">
       <span>HOSTEL </span></button>
       <div class="dropdown-content">
-        <a href="/hostel/roomregistration/">ROOM REGISTRATION</a>
-        <a href="/hostel/inout/">HOSTEL LEAVE</a>
-        <a href="#">HOSTEL COMPLAINT</a>
-        <a href="/hostel/guestEntry/">GUESTS ENTRY</a>
+        <a href="/hostel/roomregistration">ROOM REGISTRATION</a>
+        <a href="/hostel/inout">HOSTEL LEAVE</a>
+        <a href="/hostel/hostel_complaint">HOSTEL COMPLAINT</a>
+        <a href="/hostel/guestEntry">GUESTS ENTRY</a>
       </div>
   </div>
   <div class="dropdown">
@@ -272,35 +207,67 @@ function as(){
       <div class="dropdown-content">
         <a href="/mess/messmenu">MESS MENU</a>
         <a href="/mess/feedback">MESS COMPLAINT</a>
-        
+       
         <a href="/mess/refund">MESS REFUND</a>
       </div>
    </div>
 	<button class="button" style="vertical-align:middle" onclick="window.location.href='file:///C:/Users/dell/Desktop/ASE-WEBPAGE/Login.html#'"><span>LOGOUT </span></button></center>
 </div>
-</center>	
 <br>
-<table>
+<table  >
 <tr >
   <td width="30%">
 <div class="img-rounded" style="float: left; background-color: #ffc107; width: 300px; height: 500px; border: 1px solid black; margin: 10px;"><h3 style="color: #ffffff; background-color: #28a745; text-align: center; margin: 0px; padding: 0px;">Announcements</h3><div id="cc-homepage-announcements" style="height: 320px; overflow-x: hidden; overflow-y: auto; padding: 6px; text-align: left;">&nbsp;</div>
 </div>
   </td>
-  
-  <td width="63.5%" valign="top" >
-	<center><h1 class="card" style="color:#B22222;font-size:41px;font-family:Copperplate Gothic Bold">HOSTEL COMPLAINT<h1></center>
-	&emsp;&emsp;&emsp;&emsp;&emsp;
-	<form class="card" action="/hostel/hostel_complaint/" method="post" onSubmit="as()">
-{% csrf_token %}
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<fieldset>
-	
-	</fieldset>&emsp;&emsp;
-	<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-	<textarea id="feedback" placeholder="Write your complaint with room number..." name="complaint" type="text" maxlength="200" required autofocus></textarea><br><br>
-	<center><button>SUBMIT</button></center></form>
+  <td width="63.5%">
+<div class="slideshow-container">
+<div class="mySlides fade" >
+  <img src="{% static 'images/H1.jpg'%}" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+  <img src="{% static 'images/H2.jpg'%}" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+  <img src="{% static 'images/H3.jpg'%}" style="width:100%">
+</div>
+</div>
 </td>
 </tr>
 </table>
+
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+
 </body>
+
 </html>

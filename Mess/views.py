@@ -5,12 +5,15 @@ from django.shortcuts import render, get_object_or_404
 from .forms import RefundForm,FeedbackForm
 from django.contrib.auth import get_user_model
 from Hostel.models  import Student
-from .models import *
+from Mess.models import Refund
 User = get_user_model()
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg','pdf']
 
-
+def homepage(request):
+	return render(request,'Mess/MyHome.html')
+def messmenu(request):
+	return render(request,'Mess/messmenu.html')
 def refund(request):
     if not request.user.is_authenticated():
         return render(request, 'Mess/login.html')
@@ -18,23 +21,42 @@ def refund(request):
         form = RefundForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             mess = form.save(commit=False)
-            mess.student = Student.objects.get(user=request.user)
-            mess.mail_proof = request.FILES['mail_proof']
+            #mess.student = Student.objects.get(user=request.user)
+	    usr=User.objects.get(username=request.user.username)
+	    stud=Student()
+	    stud=Student.objects.get(user=usr)
+			
+			
+
+        		
+            			
+            from_date=request.POST.get('from_date')
+	    to_date=request.POST.get('to_date')
+				
+	    messrefund=Refund()
+	    messrefund.from_date=from_date
+	    messrefund.mail_proof=request.FILES.get('mail_proof')
+	    messrefund.to_date=to_date
+	    messrefund.student=stud
+           
+            #mess.mail_proof = request.FILES['mail_proof']
             file_type = mess.mail_proof.url.split('.')[-1]
             file_type = file_type.lower()
             if file_type not in IMAGE_FILE_TYPES:
                 context = {
-                    'mess': mess,
-                    'form': form,
+                    #'mess': mess,
+                    #'form': form,
                     'error_message': 'Image file must be PNG, JPG, or JPEG',
                 }
                 return render(request, 'Mess/refund.html', context)
-            mess.save()
-            return HttpResponse("Advance happy diwali")
+            messrefund.save()
+            return render(request, 'Mess/popup.html', {'error_message': 'refund form submitted successfully'})
         context = {
             "form": form,
         }
         return render(request, 'Mess/refund.html', context)
+
+
 def feedback(request):
     if not request.user.is_authenticated():
         return render(request, 'Mess/login.html')
@@ -44,27 +66,7 @@ def feedback(request):
             mess = form.save(commit=False)
             mess.student = Student.objects.get(user=request.user)
             mess.save()
-            return render(request, 'Mess/feedbacksuccess.html', {'error_message': 'feedback submitted successfully'})
-        context = {
-            "form": form
-        }
-        return render(request, 'Mess/feedback.html', context)
-def feedbacklist(request):
-    if  request.user.is_authenticated():
-	mess=MessFeedback.objects.all()
-        return render(request, 'Mess/feedbacklist.html', {'mess':mess})
-    else:
-	return HttpResponse("Login as employee")
-def refundlist(request):
-    if not request.user.is_authenticated():
-        return render(request, 'Mess/login.html')
-    else:
-        form = FeedbackForm(request.POST or None)
-        if form.is_valid():
-            mess = form.save(commit=False)
-            mess.student = Student.objects.get(user=request.user)
-            mess.save()
-            return render(request, 'Mess/feedback.html', {'error_message': 'feedback submitted successfully'})
+            return render(request, 'Mess/popup.html', {'error_message': 'feedback submitted successfully'})
         context = {
             "form": form
         }
@@ -84,10 +86,10 @@ def login(request,token):
     email = res['student'][0]['Student_Email']
     print(email)
     if(email):
+        return render(request,'Mess/loginsuccess.html',{'email':email})
+
+def login_user(request):
         return render(request,'Mess/login.html')
-
-
-
 
 
 

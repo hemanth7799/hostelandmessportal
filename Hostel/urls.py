@@ -2,10 +2,11 @@ from django.conf.urls import include,url
 from . import views
 
 urlpatterns = [
-	url(r'caretakerhostelcomplaint/$', views.caretakerhostelcomplaint ,name = "index0"),
-	url(r'^inout/$', views.inOutIndex ,name = "index"),
-	url(r'^hostel_complaint/$', views.HostelComplaintIndex ,name = "index1") ,
-	url(r'^guestEntry/$', views.GuestEntryIndex ,name = "index2"),
-	url(r'^roomregistration/$', views.registration_form ,name = "index3") ]
+	 url(r'^$',views.homepage,name='homepage'),
+	url(r'caretakerhostelcomplaint/$', views.caretakerhostelcomplaint ,name = "caretaker"),
+	url(r'^inout/$', views.inOutIndex ,name = "inOut"),
+	url(r'^hostel_complaint/$', views.HostelComplaintIndex ,name = "HostelComplaint") ,
+	url(r'^guestEntry/$', views.GuestEntryIndex ,name = "Guestentry"),
+	url(r'^roomregistration/$', views.registration_form ,name = "roomregistration") ]
 
 

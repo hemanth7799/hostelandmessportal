@@ -10,6 +10,9 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from Hostel.forms import RoomRegistrationForm
 #from django.contrib.auth.models import AbstractUser
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg','pdf']
+def homepage(request):
+	return render(request,'Hostel/MyHome.html')
 def inOutIndex(request):
 	form={}
 	if request.user.is_authenticated() :
@@ -31,7 +34,7 @@ def inOutIndex(request):
 			in_out.out_place=out_place
 			in_out.out_reason=out_reason
 			in_out.save()
-			return HttpResponse('data stored in db')
+			#return HttpResponse('data stored in db')
 		context={'text':0}
 			
 		return render(request, 'Hostel/inout.html',context)
@@ -57,7 +60,7 @@ def HostelComplaintIndex(request):
 		#hos_compl.complain_time=complain_time
 
 			hos_compl.save()
-			return render(request, 'Hostel/hostelcomplaint.html',{'message':'complaint registered succesfully'})
+			#return HttpResponse('data stored in db')
 		context={'text':0}
 			
 		return render(request, 'Hostel/hostelcomplaint.html',context)
@@ -85,7 +88,7 @@ def GuestEntryIndex(request):
 			guest_entry.guest_age=guest_age
 			guest_entry.no_of_stay=no_of_days
 			guest_entry.save()
-			return HttpResponse('data stored in db')
+			#return HttpResponse('data stored in db')
 		context={'text':0}
 			
 		return render(request, 'Hostel/guestEntry.html',context)
@@ -97,28 +100,41 @@ def registration_form(request):
 	if request.user.is_authenticated() :
 		if request.method == 'POST':
 			if form.is_valid():
-	 
-				form = RoomRegistrationForm(request.POST, request.FILES)
-				usr=User.objects.get(username=request.user.username)
-				stud=Student()
-				stud=Student.objects.get(user=usr)
+	 			try:
+					form = RoomRegistrationForm(request.POST, request.FILES)
+					usr=User.objects.get(username=request.user.username)
+					stud=Student()
+					stud=Student.objects.get(user=usr)
 			
 			
 
         		
             			
-            			room_no=request.POST.get('pref_room_no')
-				hos_name=request.POST.get('hostel_name')
-				if(len(RoomRegistration.objects.filter(pref_room_no=room_no))>1 and len(RoomRegistration.objects.filter(hostel_name=hos_name))>1 ):
-					return HttpResponseRedirect('/hostel/roomregistration')
-	   			roomregis=RoomRegistration()
-	    			roomregis.pref_room_no=room_no
-	    			roomregis.fee_proof=request.FILES.get('fee_proof')
-	    			roomregis.hostel_name=hos_name
-	    			roomregis.student=stud
-				
-            			roomregis.save()
-            			return HttpResponse('data stored in db')
+            				room_no=request.POST.get('pref_room_no')
+					hos_name=request.POST.get('hostel_name')
+					if(len(RoomRegistration.objects.filter(pref_room_no=room_no))>1 and len(RoomRegistration.objects.filter(hostel_name=hos_name))>1 ):
+						return HttpResponseRedirect('/hostel/roomregistration')
+	   				roomregis=RoomRegistration()
+	    				roomregis.pref_room_no=room_no
+	    				roomregis.fee_proof=request.FILES.get('fee_proof')
+	    				roomregis.hostel_name=hos_name
+	    				roomregis.student=stud
+					file_type = roomregis.fee_proof.url.split('.')[-1]
+            				file_type = file_type.lower()
+           				if file_type not in IMAGE_FILE_TYPES:
+                				context = {
+                    			
+                    			'error_message': 'Image file must be PNG, JPG, or JPEG',
+                			}
+                				return render(request, 'Hostel/roomregistration.html', context)
+            				roomregis.save()
+            				#return HttpResponse('data stored in db')
+				except:
+					context = {
+                    			
+                    			'message': 'You have already registered for room',
+                			}
+					return render(request, 'Hostel/roomregistration.html', context)
     			else:
         			form = RoomRegistrationForm()
     		return render(request, 'Hostel/roomregistration.html', {
@@ -132,22 +148,7 @@ def caretakerhostelcomplaint(request):
 	hostel_Complaint=[]
 	student=[]
 	complaint_time=[]
-	'''for i in range(1,k):
-		hostelcomplaint_data=HostelComplaint.objects.all()[len(HostelComplaint.objects.all())-i]
-		hostelcomplaint_data=str(hostelcomplaint_data)
-		hostelcomplaint_data=hostelcomplaint_data.split(',')
-		stud=str(hostelcomplaint_data[0])
-		print(stud)
-		stud2=Student()
-		stud2.user=User.objects.get(username=stud)
-		room_regis=RoomRegistration.objects.get(student=stud2)
-		print(room_regis)
-		hostel_Complaint.append(str(hostelcomplaint_data[0]))
-		hostel_Complaint.append(str(room_regis[1]))
-		hostel_Complaint.append(str(room_regis[1]))
-		hostel_Complaint.append(str(room_regis[2]))
-		hostel_Complaint.append(str(hostelcomplaint_data[1]))
-		hostel_Complaint.append(str(hostelcomplaint_data[2]))'''
+	
 	hostelcomplaint_data=HostelComplaint.objects.all()
 	room_regis=RoomRegistration.objects.all()
 	for i in hostelcomplaint_data:
@@ -163,12 +164,7 @@ def caretakerhostelcomplaint(request):
 				#hostel_Complaint='\n'.join(hostel_Complaint)
 		
 	hostelcomplaint_data=HostelComplaint.objects.all().order_by('complain_time')
-	'''print(student)
-	print(hostel_Complaint)
-	print(complaint_time)
-	room_regis=RoomRegistration.objects.all()
-	#result = zip(hostelcomplaint_data,room_regis)
-	#context2={'hostel_complaint':result'''
+	
 	context2={'hostel_complaint':hostel_Complaint}
 	return render(request,'Hostel/caretakerhostelcomplaint.html',context2)
 	
