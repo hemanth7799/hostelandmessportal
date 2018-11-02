@@ -57,7 +57,7 @@ def HostelComplaintIndex(request):
 		#hos_compl.complain_time=complain_time
 
 			hos_compl.save()
-			return HttpResponse('data stored in db')
+			return render(request, 'Hostel/hostelcomplaint.html',{'message':'complaint registered succesfully'})
 		context={'text':0}
 			
 		return render(request, 'Hostel/hostelcomplaint.html',context)
